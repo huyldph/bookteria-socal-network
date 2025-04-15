@@ -1,4 +1,4 @@
-package com.example.microservices.profileservice;
+package com.devteria.profile;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,7 +7,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 class ProfileServiceApplicationTests {
 
     @Test
-    void contextLoads() {
-    }
-
+    void contextLoads() {}
 }

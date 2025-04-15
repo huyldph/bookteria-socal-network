@@ -1,13 +1,12 @@
-package com.example.microservices.identityservice;
+package com.devteria.profile;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class IdentityServiceApplication {
+public class ProfileServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(IdentityServiceApplication.class, args);
+        SpringApplication.run(ProfileServiceApplication.class, args);
     }
-
 }
