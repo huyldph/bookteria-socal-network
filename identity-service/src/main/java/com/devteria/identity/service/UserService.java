@@ -3,6 +3,7 @@ package com.devteria.identity.service;
 import java.util.HashSet;
 import java.util.List;
 
+import com.devteria.event.dto.NotificationEvent;
 import com.devteria.identity.mapper.ProfileMapper;
 import com.devteria.identity.repository.httpclient.ProfileClient;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -39,7 +40,7 @@ public class UserService {
     PasswordEncoder passwordEncoder;
     ProfileClient profileClient;
     ProfileMapper profileMapper;
-    KafkaTemplate<String, String> kafkaTemplate;
+    KafkaTemplate<String, Object> kafkaTemplate;
 
     public UserResponse createUser(UserCreationRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) throw new AppException(ErrorCode.USER_EXISTED);
@@ -60,8 +61,15 @@ public class UserService {
 
         log.info(profileResponse.toString());
 
+        NotificationEvent notificationEvent = NotificationEvent.builder()
+                .channel("EMAIL")
+                .recipient(request.getEmail())
+                .subject("Welcome to bookteria")
+                .body("Hello " + request.getUsername() + "!")
+                .build();
+
         //Publish message to kafka
-        kafkaTemplate.send("onboard-successful", "Welcome our new member " + user.getUsername());
+        kafkaTemplate.send("notification-delivery", notificationEvent);
 
         return userMapper.toUserResponse(user);
     }
