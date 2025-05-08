@@ -28,7 +28,7 @@ export default function Login() {
 
   const handleClick = () => {
     alert(
-      "Please refer to Oauth2 series for this implemetation guidelines. https://www.youtube.com/playlist?list=PL2xsxmVse9IbweCh6QKqZhousfEWabSeq"
+        "Please refer to Oauth2 series for this implemetation guidelines. https://www.youtube.com/playlist?list=PL2xsxmVse9IbweCh6QKqZhousfEWabSeq"
     );
   };
 
@@ -58,111 +58,111 @@ export default function Login() {
   };
 
   return (
-    <>
-      <Snackbar
-        open={snackBarOpen}
-        onClose={handleCloseSnackBar}
-        autoHideDuration={6000}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      >
-        <Alert
-          onClose={handleCloseSnackBar}
-          severity="error"
-          variant="filled"
-          sx={{ width: "100%" }}
+      <>
+        <Snackbar
+            open={snackBarOpen}
+            onClose={handleCloseSnackBar}
+            autoHideDuration={6000}
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
         >
-          {snackBarMessage}
-        </Alert>
-      </Snackbar>
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        height="100vh"
-        bgcolor={"#f0f2f5"}
-      >
-        <Card
-          sx={{
-            minWidth: 300,
-            maxWidth: 400,
-            boxShadow: 3,
-            borderRadius: 3,
-            padding: 4,
-          }}
+          <Alert
+              onClose={handleCloseSnackBar}
+              severity="error"
+              variant="filled"
+              sx={{ width: "100%" }}
+          >
+            {snackBarMessage}
+          </Alert>
+        </Snackbar>
+        <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            height="100vh"
+            bgcolor={"#f0f2f5"}
         >
-          <CardContent>
-            <Typography variant="h5" component="h1" gutterBottom>
-              Welcome to Devtetia
-            </Typography>
-            <Box
-              component="form"
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              justifyContent="center"
-              width="100%"
-              onSubmit={handleSubmit}
-            >
-              <TextField
-                label="Username"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <TextField
-                label="Password"
-                type="password"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                size="large"
-                onClick={handleSubmit}
-                fullWidth
-                sx={{
-                  mt: "15px",
-                  mb: "25px",
-                }}
+          <Card
+              sx={{
+                minWidth: 300,
+                maxWidth: 400,
+                boxShadow: 3,
+                borderRadius: 3,
+                padding: 4,
+              }}
+          >
+            <CardContent>
+              <Typography variant="h5" component="h1" gutterBottom>
+                Welcome to Devtetia
+              </Typography>
+              <Box
+                  component="form"
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  justifyContent="center"
+                  width="100%"
+                  onSubmit={handleSubmit}
               >
-                Login
-              </Button>
-              <Divider></Divider>
-            </Box>
+                <TextField
+                    label="Username"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+                <TextField
+                    label="Password"
+                    type="password"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    onClick={handleSubmit}
+                    fullWidth
+                    sx={{
+                      mt: "15px",
+                      mb: "25px",
+                    }}
+                >
+                  Login
+                </Button>
+                <Divider></Divider>
+              </Box>
 
-            <Box display="flex" flexDirection="column" width="100%" gap="25px">
-              <Button
-                type="button"
-                variant="contained"
-                color="secondary"
-                size="large"
-                onClick={handleClick}
-                fullWidth
-                sx={{ gap: "10px" }}
-              >
-                <GoogleIcon />
-                Continue with Google
-              </Button>
-              <Button
-                type="submit"
-                variant="contained"
-                color="success"
-                size="large"
-              >
-                Create an account
-              </Button>
-            </Box>
-          </CardContent>
-        </Card>
-      </Box>
-    </>
+              <Box display="flex" flexDirection="column" width="100%" gap="25px">
+                <Button
+                    type="button"
+                    variant="contained"
+                    color="secondary"
+                    size="large"
+                    onClick={handleClick}
+                    fullWidth
+                    sx={{ gap: "10px" }}
+                >
+                  <GoogleIcon />
+                  Continue with Google
+                </Button>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="success"
+                    size="large"
+                >
+                  Create an account
+                </Button>
+              </Box>
+            </CardContent>
+          </Card>
+        </Box>
+      </>
   );
 }
