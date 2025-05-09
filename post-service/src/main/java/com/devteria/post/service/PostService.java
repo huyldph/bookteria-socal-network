@@ -17,13 +17,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PostService {
     PostRepository postRepository;
+    DateTimeFormatter dateTimeFormatter;
     PostMapper postMapper;
 
     public PostResponse createPost(PostRequest postRequest) {
@@ -50,13 +50,19 @@ public class PostService {
         Pageable pageable = PageRequest.of(page - 1, size, sort);
 
         var postPage = postRepository.findAllByUserId(userId, pageable);
+        var postList = postPage.getContent().stream().map(post -> {
+            var postResponse = postMapper.toPostResponse(post);
+            postResponse.setCreated(dateTimeFormatter.format(post.getCreatedDate()));
+
+            return postResponse;
+        }).toList();
 
         return PageResponse.<PostResponse>builder()
                 .currentPage(page)
                 .pageSize(postPage.getSize())
                 .totalPages(postPage.getTotalPages())
                 .totalElements(postPage.getTotalElements())
-                .data(postPage.getContent().stream().map(postMapper::toPostResponse).toList())
+                .data(postList)
                 .build();
     }
 }
