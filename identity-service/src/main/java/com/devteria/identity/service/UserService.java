@@ -56,6 +56,7 @@ public class UserService {
 
         var profileRequest = profileMapper.toProfileCreationRequest(request);
         profileRequest.setUserId(user.getId());
+        log.info("Profile request username: {}", profileRequest.getUsername());
 
         var profileResponse = profileClient.createProfile(profileRequest);
 

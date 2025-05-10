@@ -31,20 +31,30 @@ public class UserProfileService {
         UserProfile userProfile = userProfileMapper.toUserProfile(request);
         userProfile = userProfileRepository.save(userProfile);
 
-        return userProfileMapper.toUserProfileReponse(userProfile);
+        return userProfileMapper.toUserProfileResponse(userProfile);
+    }
+
+    public UserProfileResponse getByUserId(String userId) {
+        UserProfile userProfile =
+                userProfileRepository.findByUserId(userId)
+                        .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+        log.info("User profile found: {}", userProfile.getUsername());
+
+        return userProfileMapper.toUserProfileResponse(userProfile);
     }
 
     public UserProfileResponse getProfile(String id) {
         UserProfile userProfile =
-                userProfileRepository.findById(id).orElseThrow(() -> new RuntimeException("Profile not found"));
+                userProfileRepository.findById(id)
+                        .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
-        return userProfileMapper.toUserProfileReponse(userProfile);
+        return userProfileMapper.toUserProfileResponse(userProfile);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     public List<UserProfileResponse> getAllProfiles() {
         List<UserProfile> userProfiles = userProfileRepository.findAll();
-        return userProfiles.stream().map(userProfileMapper::toUserProfileReponse).toList();
+        return userProfiles.stream().map(userProfileMapper::toUserProfileResponse).toList();
     }
 
     public UserProfileResponse getMyProfile() {
@@ -54,6 +64,6 @@ public class UserProfileService {
         var profile = userProfileRepository.findByUserId(userId)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
-        return userProfileMapper.toUserProfileReponse(profile);
+        return userProfileMapper.toUserProfileResponse(profile);
     }
 }
