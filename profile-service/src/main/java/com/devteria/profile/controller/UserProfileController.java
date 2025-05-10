@@ -4,7 +4,6 @@ import com.devteria.profile.dto.ApiResponse;
 import com.devteria.profile.dto.response.UserProfileResponse;
 import org.springframework.web.bind.annotation.*;
 
-import com.devteria.profile.dto.request.ProfileCreationRequest;
 import com.devteria.profile.service.UserProfileService;
 
 import lombok.AccessLevel;
@@ -18,11 +17,6 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserProfileController {
     UserProfileService userProfileService;
-
-    @PostMapping("/internal/users")
-    UserProfileResponse createProfile(@RequestBody ProfileCreationRequest request) {
-        return userProfileService.createProfile(request);
-    }
 
     @GetMapping("/users")
     List<UserProfileResponse> getAllProfiles() {
