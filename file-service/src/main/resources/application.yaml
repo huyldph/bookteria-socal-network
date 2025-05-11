@@ -8,8 +8,11 @@ spring:
   data:
     mongodb:
       uri: mongodb://root:root@localhost:27017/file-service?authSource=admin
-
+  servlet:
+    multipart:
+        max-file-size: 10MB
+        max-request-size: 10MB
 app:
   file:
     storage-dir: c:/uploads
-    download-prefix: http://localhost:8888/api/v1/file/media/
+    download-prefix: http://localhost:8888/api/v1/file/media/download/
